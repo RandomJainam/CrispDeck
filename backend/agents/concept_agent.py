@@ -1,4 +1,4 @@
-from backend.services.llm_service import ask_llm
+from backend.services.llm_router import ask_llm
 
 class ConceptAgent:
 
@@ -16,6 +16,9 @@ class ConceptAgent:
         {text[:12000]}
         """
 
-        response = ask_llm(prompt)
+        response = ask_llm(
+            prompt,
+            task="concept"
+        )
 
         return response

@@ -4,3 +4,7 @@ __pycache__/
 *.pyc
 crispdeck_output.csv
 crispdeck_output.apkg
+*.csv
+*.apkg
+backend/uploads/
+*.pdf

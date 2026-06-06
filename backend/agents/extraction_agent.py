@@ -1,9 +1,7 @@
-from backend.services.pdf_service import extract_text
+from backend.services.file_router import extract_content
 
 class ExtractionAgent:
 
-    def run(self, pdf_path):
+    def run(self, file_path):
 
-        text = extract_text(pdf_path)
-
-        return text
+        return extract_content(file_path)

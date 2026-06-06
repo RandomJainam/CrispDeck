@@ -1,4 +1,4 @@
-from backend.services.llm_service import ask_llm
+from backend.services.llm_router import ask_llm
 
 class GenerationAgent:
 
@@ -28,4 +28,10 @@ class GenerationAgent:
         {concepts}
         """
 
-        return ask_llm(prompt)
+        response = ask_llm(
+            prompt,
+            task="generation"
+        )
+    
+        return response
+    
