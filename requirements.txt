@@ -2,6 +2,7 @@ streamlit
 openai
 python-dotenv
 pymupdf
+easyocr
 python-pptx
 python-docx
 genanki
