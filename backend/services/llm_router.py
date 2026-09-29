@@ -11,10 +11,10 @@ client = OpenAI(
 )
 
 MODEL_MAP = {
-    "concept": "openai/gpt-oss-20b:free",
-    "generation": "openai/gpt-oss-20b:free",
-    "validation": "openai/gpt-oss-20b:free",
-    "coverage": "openai/gpt-oss-20b:free"
+    "concept": "openrouter/free",
+    "generation": "openrouter/free",
+    "validation": "openrouter/free",
+    "coverage": "openrouter/free"
 }
 
 def ask_llm(prompt, task="generation"):

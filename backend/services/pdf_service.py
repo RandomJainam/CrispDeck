@@ -1,5 +1,9 @@
 import fitz
 
+from backend.services.ocr_service import (
+    extract_ocr_text
+)
+
 def extract_text(pdf_path):
 
     doc = fitz.open(pdf_path)
@@ -7,8 +11,17 @@ def extract_text(pdf_path):
     text = ""
 
     for page in doc:
+
         text += page.get_text()
 
-    doc.close()
+    if text.strip():
 
-    return text 
+        return text
+
+    print(
+        "No embedded text found. Running OCR..."
+    )
+
+    return extract_ocr_text(
+        pdf_path
+    )

@@ -10,9 +10,7 @@ from backend.agents.coverage_agent import CoverageAgent
 
 from backend.services.apkg_service import create_apkg
 
-# -----------------------------------
-# PAGE CONFIG
-# -----------------------------------
+
 
 st.set_page_config(
     page_title="CrispDeck",
@@ -20,9 +18,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# -----------------------------------
-# SESSION STATE
-# -----------------------------------
+
 
 if "cards" not in st.session_state:
     st.session_state.cards = None
@@ -42,9 +38,7 @@ if "filename" not in st.session_state:
 if "coverage_report" not in st.session_state:
     st.session_state.coverage_report = None
 
-# -----------------------------------
-# UI
-# -----------------------------------
+
 
 st.title("📚 CrispDeck")
 
@@ -60,9 +54,7 @@ uploaded_files = st.file_uploader(
     accept_multiple_files=True
 )
 
-# -----------------------------------
-# FILE PROCESSING
-# -----------------------------------
+
 
 if uploaded_files:
 
@@ -140,9 +132,7 @@ if uploaded_files:
                         study_material_text += (
                             text + "\n\n"
                      )
-                # -----------------------
-                # COVERAGE ANALYSIS
-                # -----------------------
+                
 
                 coverage_agent = CoverageAgent()
 
@@ -150,18 +140,22 @@ if uploaded_files:
                     syllabus_text,
                     study_material_text
                 )
+                st.write("Coverage Report Type:", type(coverage_report))
+                st.write("Coverage Report:", coverage_report)
 
                 st.write("syllabus lenghth:", len(syllabus_text))
                 st.write("study material lenghth:", len(study_material_text))
                 st.write("raw coverage report:", coverage_report)
-
-                st.session_state.coverage_report = (
+                if not coverage_report:
+                        st.warning(
+                            "Coverage analysis skipped. Syllabus file contains no extractable text."
+                        )
+                st.session_state.coverage_report = ( 
                     coverage_report
+                    
                 )
 
-                # -----------------------
-                # FLASHCARD GENERATION
-                # -----------------------
+                
 
                 concept_agent = ConceptAgent()
 
@@ -180,6 +174,8 @@ if uploaded_files:
                 cards = validation_agent.run(
                     flashcards
                 )
+                st.write("Cards Type:", type(cards))
+                st.write("Cards:", cards)
 
                 # -----------------------
                 # SAVE SESSION

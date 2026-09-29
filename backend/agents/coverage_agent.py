@@ -37,7 +37,8 @@ Example:
     }}
 ]
 """
-
+        if not syllabus_text.strip():
+             return []
         response = ask_llm(
             prompt,
             task="coverage"
